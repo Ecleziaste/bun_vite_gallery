@@ -14,5 +14,10 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'prettier/prettier': ['error', { singleQuote: true }, { usePrettierrc: true }],
+    'react-hooks/exhaustive-deps': 'warn',
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
+    'react/react-in-jsx-scope': 'off',
   },
 }
