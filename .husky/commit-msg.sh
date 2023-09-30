@@ -1,5 +1,5 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+. '$(dirname '$0')/_/husky.sh'
 
-npx --no -- commitlint --edit ""
+npx --no -- commitlint --edit ''
 bun commitlint --edit $1
