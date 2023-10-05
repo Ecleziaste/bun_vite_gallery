@@ -1,13 +1,14 @@
+import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { ROUTES } from '../common/routes.ts';
-import { useToken } from '../hooks/use-token.ts';
+import { RoutesNames } from '../common/routes-names.ts';
+import { getCookie } from '../helpers/cookie-helper.ts';
 
-export const WithAuth = (children: JSX.Element) => {
-  const { accessToken } = useToken();
+export const WithAuth = (children: ReactNode) => {
+  const accessToken = getCookie('accessToken');
 
   if (!accessToken) {
-    return <Navigate to={ROUTES.ROOT} replace />;
+    return <Navigate to={RoutesNames.AUTH} replace />;
   }
 
   return children;

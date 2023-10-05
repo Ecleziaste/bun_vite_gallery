@@ -1,27 +1,46 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { ROUTES } from '../shared/common/routes.ts';
-import { WithAuth } from '../shared/hocs';
+import { galleryMapRoutes } from '../frontend-modules/gallery-map/routes/gallery-map-routes.tsx';
+import { pictureCollectionRoutes } from '../frontend-modules/picture-collection/routes/picture-collection-routes.ts';
+import { AuthPage, HomePage, ProfilePage, WrongRoutePage } from '../pages';
+import { RoutesNames } from '../shared/common/routes-names.ts';
+import { RootLayout } from '../widgets';
+
 //TODO:
-const LOADER = undefined;
+const LOADER = () => '...LOADING...';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    loader: LOADER,
+    children: [
+      {
+        path: RoutesNames.AUTH,
+        element: <AuthPage />,
+        loader: LOADER,
+      },
+      {
+        path: RoutesNames.HOME,
+        element: <HomePage />,
+        loader: LOADER,
+      },
+      {
+        path: RoutesNames.PROFILE,
+        element: <ProfilePage />,
+        loader: LOADER,
+      },
+      {
+        path: '*',
+        element: <WrongRoutePage />,
+        loader: LOADER,
+      },
+      ...pictureCollectionRoutes,
+      ...galleryMapRoutes,
+    ],
+  },
+]);
+
 export const Navigator = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        {/*<Route path={ROUTES.ROOT} loader={LOADER}>*/}
-        <Route
-          index
-          path={ROUTES.AUTH}
-          // element={<AuthPage />}
-          element={<div>Auth Page</div>}
-          loader={LOADER}
-        />
-        <Route path={ROUTES.HOME} element={WithAuth(<div>Home Page</div>)} loader={LOADER} />
-        <Route path={ROUTES.MY_GALLERY} element={WithAuth(<div>My gallery page</div>)} loader={LOADER} />
-        <Route path={ROUTES.PROFILE} element={WithAuth(<div>Profile Page</div>)} loader={LOADER} />
-        <Route path={ROUTES.GALLERIES} element={WithAuth(<div>GALLERIES PAGE</div>)} loader={LOADER} />
-        {/*</Route>*/}
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} fallbackElement={<p>...Loading...</p>} />;
 };
