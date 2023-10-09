@@ -1,5 +1,7 @@
 import './App.css';
 
+import { ChakraProvider } from '@chakra-ui/react';
+
 import { Navigator } from '../processes/navigator.tsx';
 
 // const colors = {
@@ -29,9 +31,11 @@ import { Navigator } from '../processes/navigator.tsx';
 
 function App() {
   return (
-    // <ChakraProvider theme={theme}>
-    <Navigator />
-    // </ChakraProvider>
+    <ChakraProvider
+    // theme={theme}
+    >
+      <Navigator />
+    </ChakraProvider>
   );
 }
 
