@@ -1,4 +1,9 @@
+import { AuthForm } from '../../widgets';
+
 export const AuthPage = () => {
-  // TODO: if authorized redirect to home page
-  return <div>Auth page</div>;
+  return (
+    <div>
+      <AuthForm />
+    </div>
+  );
 };

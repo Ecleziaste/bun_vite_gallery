@@ -30,7 +30,7 @@ body {
     box-sizing: border-box;
     background: darkslategrey;
 
-
+    /*TODO: remove or let it be*/
     /*& > div:first-child {*/
     /*    height: 100%;*/
     /*    display: flex;*/
