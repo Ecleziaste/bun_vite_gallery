@@ -23,3 +23,12 @@ export enum HttpMethods {
   delete = 'DELETE',
   request = 'REQUEST',
 }
+
+export const defaultSnapshot = {
+  app: { accessToken: '', isModalOpened: false },
+  user: {
+    id: '',
+    name: '',
+    avatarUrl: '',
+  },
+};

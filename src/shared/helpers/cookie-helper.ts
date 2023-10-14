@@ -1,8 +1,8 @@
 import Cookies from 'js-cookie';
 
-export const setCookie = (key: string, value: string) => {
+export const setCookie = (key: string, value: string, options?: Cookies.CookieAttributes) => {
   Cookies.set(key, value, {
-    expires: 7,
+    ...options,
   });
 };
 

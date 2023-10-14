@@ -1,6 +1,11 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+
+import { RoutesNames } from '../../shared/common/routes-names.ts';
 
 export const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       w="100%"
@@ -12,6 +17,9 @@ export const Header = () => {
       borderBottom="1px solid grey"
     >
       <Box>Header</Box>
+      <Button w="100px" h="40px" onClick={() => navigate(RoutesNames.PROFILE)}>
+        Profile
+      </Button>
       <Box>Profile menu</Box>
     </Flex>
   );

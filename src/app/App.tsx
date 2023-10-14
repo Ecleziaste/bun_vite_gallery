@@ -1,8 +1,11 @@
 import './App.css';
 
 import { ChakraProvider } from '@chakra-ui/react';
+import { observer } from 'mobx-react-lite';
+import { onSnapshot } from 'mobx-state-tree';
 
 import { Navigator } from '../processes/navigator.tsx';
+import { store } from '../shared/store/store.ts';
 
 //TODO:
 // const colors = {
@@ -15,7 +18,11 @@ import { Navigator } from '../processes/navigator.tsx';
 //
 // const darkTheme = extendTheme({ colors });
 
-function App() {
+const App = observer(() => {
+  onSnapshot(store, (snapshot) => {
+    console.log('snapshot', snapshot);
+  });
+
   return (
     <ChakraProvider
     // theme={theme}
@@ -23,6 +30,6 @@ function App() {
       <Navigator />
     </ChakraProvider>
   );
-}
+});
 
 export default App;

@@ -1,9 +1,11 @@
+import { observer } from 'mobx-react-lite';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
-import { galleryMapRoutes } from '../app-modules/gallery-map/routes/gallery-map-routes.tsx';
-import { pictureCollectionRoutes } from '../app-modules/picture-collection/routes/picture-collection-routes.ts';
+import { galleryMapRoutes } from '../app-modules/gallery-map';
+import { pictureCollectionRoutes } from '../app-modules/picture-collection';
 import { AuthPage, HomePage, ProfilePage, WrongRoutePage } from '../pages';
 import { RoutesNames } from '../shared/common/routes-names.ts';
+import { store } from '../shared/store/store.ts';
 import { RootLayout } from '../widgets';
 import { AuthLayout } from '../widgets/layouts/auth-layout.tsx';
 
@@ -13,12 +15,16 @@ const LOADER = () => '...LOADING...';
 const guestRouter = createBrowserRouter(
   [
     {
-      path: '/',
+      path: RoutesNames.ROOT,
       element: <AuthLayout />,
       loader: LOADER,
       children: [
         {
-          path: '/',
+          path: RoutesNames.ROOT,
+          element: <Navigate to={RoutesNames.AUTH} replace />,
+        },
+        {
+          path: RoutesNames.HOME,
           element: <Navigate to={RoutesNames.AUTH} replace />,
         },
         {
@@ -40,12 +46,16 @@ const guestRouter = createBrowserRouter(
 
 const userRouter = createBrowserRouter([
   {
-    path: '/',
+    path: RoutesNames.ROOT,
     element: <RootLayout />,
     loader: LOADER,
     children: [
       {
-        path: '/',
+        path: RoutesNames.ROOT,
+        element: <Navigate to={RoutesNames.HOME} replace />,
+      },
+      {
+        path: RoutesNames.AUTH,
         element: <Navigate to={RoutesNames.HOME} replace />,
       },
       {
@@ -70,8 +80,10 @@ const userRouter = createBrowserRouter([
   },
 ]);
 
-export const Navigator = () => {
-  const accessToken = true;
+export const Navigator = observer(() => {
+  const accessTokenFromState = store.app.accessToken;
 
-  return <RouterProvider router={accessToken ? userRouter : guestRouter} fallbackElement={<p>...Loading...</p>} />;
-};
+  return (
+    <RouterProvider router={accessTokenFromState ? userRouter : guestRouter} fallbackElement={<p>...Loading...</p>} />
+  );
+});
