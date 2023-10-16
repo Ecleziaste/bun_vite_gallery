@@ -1,23 +1,23 @@
 import { useCallback, useEffect, useState } from 'react';
 
 export function useAsync(callback: () => Promise<any>, dependencies = []) {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
   const [value, setValue] = useState();
 
   const callbackMemoized = useCallback(() => {
-    setLoading(true);
+    setIsLoading(true);
     setError(undefined);
     setValue(undefined);
     callback()
       .then(setValue)
       .catch(setError)
-      .finally(() => setLoading(false));
+      .finally(() => setIsLoading(false));
   }, dependencies);
 
   useEffect(() => {
     callbackMemoized();
   }, [callbackMemoized]);
 
-  return { loading, error, value };
+  return { isLoading, error, value };
 }
