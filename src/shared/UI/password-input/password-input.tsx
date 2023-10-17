@@ -36,6 +36,7 @@ export const PasswordInput = ({ rootStyle, error, label, chakraInputProps, ...re
           children={
             <IconButton
               height="92%"
+              bg="transparent"
               aria-label="Toggle password visibility"
               icon={isPasswordVisible ? <ViewOffIcon /> : <ViewIcon />}
               onClick={() => setIsPasswordVisible((currentValue) => !currentValue)}
