@@ -6,5 +6,6 @@ export { useOnClickOutside } from './use-on-click-outside.ts';
 export { useLocalStorage, useSessionStorage } from './use-storage.ts';
 export type { UseTimeoutType } from './use-timeout.ts';
 export { useTimeout } from './use-timeout.ts';
+export { useToasts } from './use-toasts.ts';
 export type { UseToggleType } from './use-toggle.ts';
 export { useToggle } from './use-toggle.ts';

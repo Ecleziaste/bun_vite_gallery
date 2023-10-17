@@ -1,16 +1,14 @@
 import { Flex, InputProps, Text } from '@chakra-ui/react';
-import { ControllerProps } from 'react-hook-form';
 
 import { DefaultInput } from '../default-input/default-input.tsx';
 
-export type BaseInputProps<T extends object> = {
+export type BaseInputProps = {
   error?: string;
   label?: string;
-  controllerProps?: Pick<ControllerProps<T>, 'name' | 'rules'>;
   chakraInputProps?: InputProps;
 };
 
-export const BaseInput = <T extends object>({ error, label, chakraInputProps, ...rest }: BaseInputProps<T>) => {
+export const BaseInput = ({ error, label, chakraInputProps, ...rest }: BaseInputProps) => {
   return (
     <Flex direction="column" w="100%" position="relative" pb="20px">
       {label && (

@@ -2,11 +2,11 @@ import { types } from 'mobx-state-tree';
 
 export const App = types
   .model('App', {
-    accessToken: types.optional(types.string, ''),
+    accessToken: types.maybe(types.string),
     isModalOpened: types.optional(types.boolean, false),
   })
   .actions((self) => ({
-    setAccessToken(accessToken: string) {
+    setAccessToken(accessToken?: string) {
       self.accessToken = accessToken;
     },
     setIsModalOpened(isModalOpened: boolean) {

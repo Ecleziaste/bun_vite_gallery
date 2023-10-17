@@ -1,25 +1,31 @@
 import { types } from 'mobx-state-tree';
 
+import { User as UserType } from '../../../types/common-types.ts';
+
 export const User = types
   .model('User', {
-    // id: types.identifier,
-    id: types.optional(types.string, ''),
-    name: types.optional(types.string, ''),
-    avatarUrl: types.optional(types.string, ''),
+    id: types.maybe(types.string),
+    name: types.maybe(types.string),
+    email: types.maybe(types.string),
+    avatarUrl: types.maybe(types.string),
   })
   .actions((self) => ({
-    setId(id: string) {
+    setId(id?: string) {
       self.id = id;
     },
-    setName(name: string) {
+    setName(name?: string) {
       self.name = name;
     },
-    setAvatarUrl(avatarUrl: string) {
+    setEmail(email?: string) {
+      self.email = email;
+    },
+    setAvatarUrl(avatarUrl?: string) {
       self.avatarUrl = avatarUrl;
     },
-    setUser(id: string, name: string, avatarUrl: string) {
+    setUser({ id, name, email, avatarUrl }: UserType) {
       self.id = id;
       self.name = name;
+      self.email = email;
       self.avatarUrl = avatarUrl;
     },
   }));

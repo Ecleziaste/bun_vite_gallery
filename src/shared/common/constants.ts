@@ -25,10 +25,11 @@ export enum HttpMethods {
 }
 
 export const defaultSnapshot = {
-  app: { accessToken: '', isModalOpened: false },
+  app: { accessToken: undefined, isModalOpened: false },
   user: {
-    id: '',
-    name: '',
-    avatarUrl: '',
+    id: undefined,
+    name: undefined,
+    email: undefined,
+    avatarUrl: undefined,
   },
 };

@@ -1,59 +1,76 @@
 import { Box, Grid, Stack } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { v4 as uuid } from 'uuid';
 
 import { CookiesKeys } from '../../shared/common/constants.ts';
 import { setCookie } from '../../shared/helpers';
+import { useToasts } from '../../shared/hooks';
 import { store } from '../../shared/store/store.ts';
-import { BaseButton, BaseInput } from '../../shared/UI';
-import { PasswordInput } from '../../shared/UI/password-input/password-input.tsx';
+import { BaseButton, BaseInput, PasswordInput } from '../../shared/UI';
+import { regExp } from '../../shared/utils/regExp.ts';
 
 type AuthFormValues = {
   email: string;
   password: string;
 };
 
+const DEFAULT_VALUES: AuthFormValues = {
+  email: '',
+  password: '',
+};
+
 export const AuthForm = observer(() => {
+  const { showSuccessToast, showFailToast } = useToasts();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     app: { setAccessToken },
     user: { setUser },
   } = store;
   const {
     handleSubmit,
-    // control,
-    // reset,
-    formState: {
-      isValid,
-      // errors
-    },
+    control,
+    reset,
+    watch,
+    formState: { isValid, errors, isSubmitted },
   } = useForm<AuthFormValues>({
-    defaultValues: {},
+    defaultValues: DEFAULT_VALUES,
     reValidateMode: 'onChange',
+    mode: 'onSubmit',
   });
+  const watchedValues = watch();
 
-  //TODO:
   const fetchAuth = async (email: string, password: string) => {
-    console.log(email);
-    return console.log(password);
+    //TODO: awaiting backend
+    const accessToken = `token${password}`;
 
-    setCookie(CookiesKeys.accessToken, 'token', { expires: 7 });
-    setAccessToken('token');
-    setUser(uuid(), 'name', 'avatar');
+    setCookie(CookiesKeys.accessToken, accessToken, { expires: 7 });
+    setAccessToken(accessToken);
+    setUser({ id: uuid(), email });
   };
 
-  // const { value, isLoading } = useAsync(fetchAuth);
+  const onSubmit = async (data: AuthFormValues) => {
+    if (!isValid) {
+      return;
+    }
 
-  const onSubmit = (data?: AuthFormValues) => {
-    if (data) {
-      fetchAuth(data.email, data.password);
+    try {
+      setIsLoading(true);
+      await fetchAuth(data.email, data.password);
+      showSuccessToast('Welcome to app!');
+    } catch (err) {
+      showFailToast(err as string);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack
-        w="400px"
+        maxW="400px"
+        minW="320px"
         h="330px"
         bg="cyan.100"
         border="2px solid saddlebrown"
@@ -64,27 +81,49 @@ export const AuthForm = observer(() => {
       >
         <Box mt={1} mb={2} fontSize="24px" children="Register or login" />
 
-        <BaseInput label="Enter e-mail:" chakraInputProps={{ placeholder: 'E-mail' }} error={'WTF sadsad'} />
-        <PasswordInput
-          label="Enter password:"
-          // rootStyle={{ marginBottom: '10px' }}
-          chakraInputProps={{ placeholder: 'Password' }}
-          error={'WTF sadsad'}
+        <Controller
+          name="email"
+          control={control}
+          rules={{ required: true, pattern: { value: regExp.email, message: `Valid format is 'example@email.com'` } }}
+          render={({ field }) => {
+            return (
+              <BaseInput
+                label="Enter e-mail:"
+                chakraInputProps={{ placeholder: 'example@email.com', ...field }}
+                error={errors?.email?.message}
+              />
+            );
+          }}
+        />
+        <Controller
+          name="password"
+          control={control}
+          rules={{ required: true, minLength: { value: 8, message: 'Password minimum length is 8' } }}
+          render={({ field }) => {
+            return (
+              <PasswordInput
+                label="Enter password:"
+                chakraInputProps={{ placeholder: 'Eight characters password', ...field }}
+                error={errors?.password?.message}
+              />
+            );
+          }}
         />
 
         <Grid flexDirection="row" w="100%" gridTemplateColumns={'1fr 3fr'} gap={2}>
           <BaseButton
             text="Clear"
             chakraButtonProps={{
-              // disabled: ,
+              isDisabled: watchedValues?.email?.length < 1 && watchedValues?.password?.length < 1,
               type: 'reset',
+              onClick: () => reset(),
             }}
           />
           <BaseButton
             text="Continue"
             chakraButtonProps={{
-              // isLoading: isLoading,
-              disabled: !isValid,
+              isLoading,
+              isDisabled: isSubmitted && !isValid,
               type: 'submit',
             }}
           />

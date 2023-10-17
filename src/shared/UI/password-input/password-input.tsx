@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { BaseInputProps } from '../base-input/base-input.tsx';
 import { DefaultInput } from '../default-input/default-input.tsx';
 
-type PasswordInputProps = { rootStyle?: FlexProps; error?: string } & BaseInputProps<any>;
+type PasswordInputProps = { rootStyle?: FlexProps; error?: string } & BaseInputProps;
 
 export const PasswordInput = ({ rootStyle, error, label, chakraInputProps, ...rest }: PasswordInputProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);

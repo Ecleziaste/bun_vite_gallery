@@ -1,13 +1,15 @@
 import { Input, InputProps } from '@chakra-ui/react';
-import { ControllerProps } from 'react-hook-form';
+import { ForwardRefRenderFunction } from 'react';
 
-export type DefaultInputProps<T extends object> = {
-  controllerProps?: Pick<ControllerProps<T>, 'name' | 'rules'>;
+export type DefaultInputProps = {
   chakraInputProps?: InputProps;
 };
 
 const INPUT_MAX_LENGTH = 266;
 
-export const DefaultInput = <T extends object>({ chakraInputProps, ...rest }: DefaultInputProps<T>) => {
-  return <Input maxLength={INPUT_MAX_LENGTH} {...chakraInputProps} {...rest} />;
+export const DefaultInput: ForwardRefRenderFunction<HTMLInputElement, DefaultInputProps> = (
+  { chakraInputProps, ...rest }: DefaultInputProps,
+  ref,
+) => {
+  return <Input maxLength={INPUT_MAX_LENGTH} ref={ref} {...chakraInputProps} {...rest} />;
 };
