@@ -1,4 +1,4 @@
-import { Box, Grid, Stack } from '@chakra-ui/react';
+import { Box, Grid, Stack, useColorModeValue } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -22,6 +22,7 @@ const DEFAULT_VALUES: AuthFormValues = {
 };
 
 export const AuthForm = observer(() => {
+  const bg = useColorModeValue('cyan.100', 'gray.900');
   const { showSuccessToast, showFailToast } = useToasts();
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -72,7 +73,7 @@ export const AuthForm = observer(() => {
         maxW="400px"
         minW="320px"
         h="330px"
-        bg="cyan.100"
+        bg={bg}
         border="2px solid saddlebrown"
         alignItems="center"
         p={3}

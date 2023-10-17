@@ -25,7 +25,7 @@ export enum HttpMethods {
 }
 
 export const defaultSnapshot = {
-  app: { accessToken: undefined, isModalOpened: false },
+  app: { accessToken: undefined, isModalOpened: false, isDarkMode: true },
   user: {
     id: undefined,
     name: undefined,

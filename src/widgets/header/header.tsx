@@ -1,21 +1,24 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { observer } from 'mobx-react-lite';
 
-import { HeaderMenu } from './components';
+import { HeaderMenu, ThemeSwitcher } from './components';
 
-export const Header = () => {
+export const Header = observer(() => {
+  const bg = useColorModeValue('cyan.100', 'teal.900');
+
   return (
     <Flex
       w="100%"
       h="70px"
-      bg="purple.200"
+      bg={bg}
       justifyContent="space-between"
       alignItems="center"
-      p={2}
+      px={10}
+      py={2}
       borderBottom="1px solid grey"
     >
-      <Box>Header</Box>
-
+      <ThemeSwitcher />
       <HeaderMenu />
     </Flex>
   );
-};
+});

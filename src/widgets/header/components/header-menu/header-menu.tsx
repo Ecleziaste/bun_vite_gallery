@@ -1,5 +1,5 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
-import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { Button, Menu, MenuButton, MenuItem, MenuList, useColorModeValue } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 import { useLogOut } from '../../../../features';
@@ -8,6 +8,7 @@ import { RoutesNames } from '../../../../shared/common/routes-names.ts';
 export const HeaderMenu = () => {
   const logout = useLogOut();
   const navigate = useNavigate();
+  const bg = useColorModeValue('gray.300', 'gray.700');
 
   return (
     <Menu>
@@ -20,9 +21,11 @@ export const HeaderMenu = () => {
             transition="all 0.2s"
             borderRadius="md"
             borderWidth="1px"
+            bg={bg}
             _hover={{ bg: 'gray.400' }}
-            _expanded={{ bg: 'blue.400' }}
-            _focus={{ boxShadow: 'outline' }}
+            _expanded={{ bg: 'orange.400' }}
+            // _focus={{ boxShadow: 'outline' }}
+            fontWeight={500}
             isActive={isOpen}
             as={Button}
             rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
