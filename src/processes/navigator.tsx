@@ -1,3 +1,4 @@
+import { Spinner } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
@@ -9,8 +10,7 @@ import { store } from '../shared/store/store.ts';
 import { RootLayout } from '../widgets';
 import { AuthLayout } from '../widgets/layouts/auth-layout.tsx';
 
-//TODO:
-const LOADER = () => '...LOADING...';
+const LOADER = () => <Spinner />;
 
 const guestRouter = createBrowserRouter(
   [
@@ -20,15 +20,11 @@ const guestRouter = createBrowserRouter(
       loader: LOADER,
       children: [
         {
+          index: true,
           path: RoutesNames.ROOT,
           element: <Navigate to={RoutesNames.AUTH} replace />,
         },
         {
-          path: RoutesNames.HOME,
-          element: <Navigate to={RoutesNames.AUTH} replace />,
-        },
-        {
-          index: true,
           path: RoutesNames.AUTH,
           element: <AuthPage />,
           loader: LOADER,
@@ -51,15 +47,11 @@ const userRouter = createBrowserRouter([
     loader: LOADER,
     children: [
       {
+        index: true,
         path: RoutesNames.ROOT,
         element: <Navigate to={RoutesNames.HOME} replace />,
       },
       {
-        path: RoutesNames.AUTH,
-        element: <Navigate to={RoutesNames.HOME} replace />,
-      },
-      {
-        index: true,
         path: RoutesNames.HOME,
         element: <HomePage />,
         loader: LOADER,
@@ -84,6 +76,6 @@ export const Navigator = observer(() => {
   const accessTokenFromState = store.app.accessToken;
 
   return (
-    <RouterProvider router={accessTokenFromState ? userRouter : guestRouter} fallbackElement={<p>...Loading...</p>} />
+    <RouterProvider router={accessTokenFromState ? userRouter : guestRouter} fallbackElement={<Spinner size="xl" />} />
   );
 });
