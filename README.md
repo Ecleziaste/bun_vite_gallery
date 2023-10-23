@@ -68,17 +68,17 @@ const Component = ({ props } : ComponentProps) => {};
 
 ## Установка
 
-```bash
 # установка зависимостей
-$ bun
+```bash
+bun
 ```
 
 
 ## Разработка
 
-```bash
 # запустить проект
-$ bun dev
+```bash
+bun dev
 ```
 
 
