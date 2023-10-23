@@ -1,8 +1,8 @@
 import { types } from 'mobx-state-tree';
 import persist from 'mst-persist';
 
-import { defaultSnapshot } from '../common/constants.ts';
-import { App, User } from './entities';
+import { defaultSnapshot } from '../../shared/common/constants.ts';
+import { App, User } from './slices';
 
 export const RootStore = types.model({
   app: App,

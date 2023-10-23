@@ -1,7 +1,7 @@
 import { Flex, FormLabel, Switch, useColorMode } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
 
-import { store } from '../../../../shared/store/store.ts';
+import { store } from '../../../../entities';
 
 export const ThemeSwitcher = observer(() => {
   const { colorMode, toggleColorMode } = useColorMode();

@@ -4,8 +4,8 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { observer } from 'mobx-react-lite';
 import { onSnapshot } from 'mobx-state-tree';
 
+import { store } from '../entities';
 import { Navigator } from '../processes/navigator.tsx';
-import { store } from '../shared/store/store.ts';
 
 const App = observer(() => {
   onSnapshot(store, (snapshot) => {

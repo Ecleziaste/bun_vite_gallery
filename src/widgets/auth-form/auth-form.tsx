@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { v4 as uuid } from 'uuid';
 
+import { store } from '../../entities';
 import { CookiesKeys } from '../../shared/common/constants.ts';
 import { setCookie } from '../../shared/helpers';
 import { useToasts } from '../../shared/hooks';
-import { store } from '../../shared/store/store.ts';
 import { BaseButton, BaseInput, PasswordInput } from '../../shared/UI';
 import { regExp } from '../../shared/utils/regExp.ts';
 
@@ -52,9 +52,7 @@ export const AuthForm = observer(() => {
   };
 
   const onSubmit = async (data: AuthFormValues) => {
-    if (!isValid) {
-      return;
-    }
+    if (!isValid) return;
 
     try {
       setIsLoading(true);

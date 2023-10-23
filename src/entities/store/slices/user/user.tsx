@@ -1,6 +1,6 @@
 import { types } from 'mobx-state-tree';
 
-import { User as UserType } from '../../../types/common-types.ts';
+import { User as UserType } from '../../../../shared/types/common-types.ts';
 
 export const User = types
   .model('User', {
