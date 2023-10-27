@@ -1,10 +1,5 @@
 export const DEFAULT_PAGE_LIMIT = 9;
 
-export enum FrontendModule {
-  pictureGallery = 'pictureGallery',
-  galleryMap = 'galleryMap',
-}
-
 export enum CookiesKeys {
   accessToken = 'accessToken',
   breadcrumbs = 'breadcrumbs',

@@ -14,7 +14,7 @@ const pictureCollectionRoutesLoader = () => '...Picture Collection Loading ...';
 export const pictureCollectionRoutes = [
   {
     path: RoutesNames.MY_COLLECTION,
-    element: WithAuth(MyCollectionPage()),
+    element: WithAuth(<MyCollectionPage />),
     loader: pictureCollectionRoutesLoader,
   },
   {

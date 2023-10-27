@@ -1,1 +1,1 @@
-export { pictureCollectionRoutes } from './routes/picture-collection-routes.ts';
+export { pictureCollectionRoutes } from './routes/picture-collection-routes.tsx';
