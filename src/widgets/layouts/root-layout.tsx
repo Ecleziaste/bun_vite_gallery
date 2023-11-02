@@ -8,9 +8,9 @@ export const RootLayout = () => {
   const bg = useColorModeValue('gray.50', 'gray.600');
 
   return (
-    <Flex flexDirection="column" minW="320px" maxW="100%" h="100%" justifyContent="space-between" p={0} bg={bg}>
+    <Flex flexDirection="column" minW="320px" maxW="100%" minH="100%" p={0} bg={bg}>
       <Header />
-      <Flex flexDirection="column" flex={1} p={4}>
+      <Flex flexDirection="column" flex={1} p={4} overflow="hidden">
         <Outlet />
       </Flex>
       <Footer />

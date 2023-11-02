@@ -1,4 +1,4 @@
-import { Flex, useMediaQuery } from '@chakra-ui/react';
+import { GridItem, useMediaQuery } from '@chakra-ui/react';
 import { Link as ReactRouterLink } from 'react-router-dom';
 
 export type AppModuleCardProps = {
@@ -12,11 +12,10 @@ export const AppModuleCard = ({ name, linkTo, color = 'green.800' }: AppModuleCa
 
   return (
     <ReactRouterLink to={linkTo}>
-      <Flex
-        maxW={isLargerThan460 ? '200px' : '400px'}
-        minW={isLargerThan460 ? '200px' : '280px'}
-        maxH={isLargerThan460 ? '200px' : '300px'}
-        minH="200px"
+      <GridItem
+        w="100%"
+        h={isLargerThan460 ? '100%' : '200px'}
+        display="flex"
         alignItems="center"
         justifyContent="center"
         bg={color}
@@ -27,7 +26,7 @@ export const AppModuleCard = ({ name, linkTo, color = 'green.800' }: AppModuleCa
         _hover={{ opacity: 0.85 }}
       >
         {name}
-      </Flex>
+      </GridItem>
     </ReactRouterLink>
   );
 };

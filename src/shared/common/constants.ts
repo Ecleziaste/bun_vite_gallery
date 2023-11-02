@@ -1,5 +1,7 @@
 export const DEFAULT_PAGE_LIMIT = 9;
 
+export const ROOT_LAYOUT_HORIZONTAL_PADDING = 18;
+
 export enum CookiesKeys {
   accessToken = 'accessToken',
   breadcrumbs = 'breadcrumbs',

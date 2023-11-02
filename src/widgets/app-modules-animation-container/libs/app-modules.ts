@@ -12,4 +12,45 @@ export const APP_MODULES: AppModuleCardProps[] = [
     linkTo: RoutesNames.MY_GALLERIES,
     color: 'orange.600',
   },
+  ////////////////////////////////////////////////
+  {
+    name: 'Picture Gallery',
+    linkTo: RoutesNames.MY_COLLECTION,
+    color: 'purple.800',
+  },
+  {
+    name: 'Gallery Map',
+    linkTo: RoutesNames.MY_GALLERIES,
+    color: 'orange.600',
+  },
+  {
+    name: 'Picture Gallery',
+    linkTo: RoutesNames.MY_COLLECTION,
+    color: 'purple.800',
+  },
+  {
+    name: 'Gallery Map',
+    linkTo: RoutesNames.MY_GALLERIES,
+    color: 'orange.600',
+  },
+  {
+    name: 'Picture Gallery',
+    linkTo: RoutesNames.MY_COLLECTION,
+    color: 'purple.800',
+  },
+  {
+    name: 'Gallery Map',
+    linkTo: RoutesNames.MY_GALLERIES,
+    color: 'orange.600',
+  },
+  {
+    name: 'Picture Gallery',
+    linkTo: RoutesNames.MY_COLLECTION,
+    color: 'purple.800',
+  },
+  {
+    name: 'Gallery Map',
+    linkTo: RoutesNames.MY_GALLERIES,
+    color: 'orange.600',
+  },
 ];
